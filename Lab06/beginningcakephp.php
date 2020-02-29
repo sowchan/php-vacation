@@ -9,22 +9,22 @@
 <?php
 $title = "Beginning CakePHP";
 $author = "David Golding";
-$isbn = "1430209771";
-$year = "2008";
-$pages = "344";
-$price = "$28.99";
+$isbn = 1430209771;
+$year = 2008;
+$pages = 344;
+$price = 28.99;
 if (filter_has_var(INPUT_POST, $title)) {
 $title = filter_input(INPUT_POST, "title", FILTER_SANITIZE_STRING);}        
 if (filter_has_var(INPUT_POST, $author )){
 $author = filter_input(INPUT_POST, "author", FILTER_SANITIZE_STRING);}
 if (filter_has_var(INPUT_POST, $isbn)) {
-$isbn = filter_input(INPUT_POST, "isbn", FILTER_SANITIZE_STRING);}
+$isbn = filter_input(INPUT_POST, "isbn", FILTER_SANITIZE_NUMBER_INT);}
 if (filter_has_var(INPUT_POST, $year )){
-$year = filter_input(INPUT_POST, "year", FILTER_SANITIZE_STRING);}
+$year = filter_input(INPUT_POST, "year", FILTER_SANITIZE_NUMBER_INT);}
 if (filter_has_var(INPUT_POST, $pages )){
-$pages = filter_input(INPUT_POST, "pages", FILTER_SANITIZE_STRING);}
+$pages = filter_input(INPUT_POST, "pages", FILTER_SANITIZE_NUMBER_INT);}
 if (filter_has_var(INPUT_POST, "$price")){
-$price = filter_input(INPUT_POST, "price", FILTER_SANITIZE_STRING);}
+$price = filter_input(INPUT_POST, "price", FILTER_FLAG_ALLOW_FRACTION);}
 
 
         
@@ -79,17 +79,20 @@ $price = filter_input(INPUT_POST, "price", FILTER_SANITIZE_STRING);}
                         <h4>Price</h4>
                     </td>
                     <td>
-                        <p> <?php echo $title ;?></p>
-                        <p> <?php echo $author ;?></p>
-                        <p> <?php echo $isbn ;?></p>
-                        <p> <?php echo $year ;?></p>
-                        <p> <?php echo $pages ;?></p>
-                        <p> <?php echo $price ;?></p>
+                        <?php 
+                        echo '<p>' . $title . '</p>';
+                        echo '<p>' . $author . '</p>';
+                        echo '<p>' . $isbn . '</p>';
+                        echo '<p>' . $year . '</p>';
+                        echo '<p>' . $pages . '</p>';
+                        echo '<p> $' . $price . '</p>';
+                        
+                        ?>
                     </td>
                 </tr>
             </table>
-          <?php $url = "edit_beginningcakephp.php?title=$title&author=$author&isbn= $isbn&   year=$year&pages=$pages&price=$price" ?> 
-            <input type="button" value="Edit Book" onclick="window.location.href='<?=$url ?>">
+          <?php $url = "edit_beginningcakephp.php?title=$title&author=$author&isbn= $isbn& year=$year&pages=$pages&price=$price" ?> 
+            <input type="button" value="Edit Book" onclick="window.location.href='<?php=$url ?>">
             <input type="button" value="Cancel" onclick="window.location.href=books.php" >
         </div>
         <!-- page footer for copyright information -->
